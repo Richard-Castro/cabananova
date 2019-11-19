@@ -1,0 +1,13 @@
+#33b7a5 cor definida logo, barra de apresentação
+
+Texto Branco
+
+#eb5425 laranja escuro
+
+#5a5d66 cinza escuro
+
+#f4f4f4 cinza claro
+
+#337ab7 Cor Letra informações
+
+Texto modal - inherit

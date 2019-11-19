@@ -1,85 +1,10 @@
-<?php
-	
-	require_once('conexao.php');
-	
-	session_start();
-
-	if(!isset($_SESSION['EMAIL'])){
-	 header("Location: fazerLogin.php?erro=1");
-	}
-
-	$msg = false;
- 
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Cabana Nova</title>
-
-
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script src="js/jquery-3.1.1.min.js"></script>
-	 
-
-	<link rel="icon" href="../images/iconesite.ico">
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/cadastro_imovel.css" rel="stylesheet" type="text/css" media="all"/>
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<link href="./css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="./js/fileinput.min.js"></script>
-	<script src="js/cadastroimovel.js"></script>
-	
-	<script type="text/javascript">
-		$(document).ready( function() {
-		
-			// initialize with defaults
-			$("#arquivos").fileinput();
-
-			// with plugin options
-			$("#arquivos").fileinput({'showUpload':false, 'previewFileType':'any'});
-			
-		});
-	</script>
-
-    <style type="text/css">
-    	.carregando{
-    		color: #ff0000;
-    		display:none;
-    	}
-    </style>
+	<title></title>
 </head>
 <body>
-
-	<nav class="menuSuperior">
-	    <div class="container">
-	        <div class="navbar-header">
-	          <a href="home.php"><img src="images/iconsite.jpg"/ width="100px" height="50px"></a>
-	        </div>
-	        
-	        <div id="navbar" class="navbar-collapse collapse">
-	          <ul class="nav navbar-nav navbar-right">
-	            <li class="btnUsuario"><p><i class="fa fa-user"></i><a href="#"><?php echo $_SESSION['NOME']; ?></a></p></li>
-	            <li class="btnSair"><p><i class="fa fa-sign-in"></i><a href="sair.php">Sair</a></p></li>
-	          </ul>
-	        </div>
-
-	    </div>
-	</nav>
-	<section class="atalhoSuperior">
-
-		<div class="col-md-12">
-
-			<div class="itemAtalho" pull-left>
-				<a href="home.php">voltar para home</a>
-			</div>
-
-		</div>
-
-	</section>
-	<section class="imagemUpload">
+<section class="imagemUpload">
 		
 			<?php include_once("conexao.php"); 
 
@@ -308,7 +233,10 @@
 									        
 					       					<div class="cendereco">
 					        					<label>Bairro</label>
-					        					<input class="width-large" id="bairro" maxlength="100" name="BAIRRO" placeholder="Bairro" type="text" value="" required>
+					        					<span class="carregando">Nenhum imovem disponível!</span>
+													<select class="width-large" id="id_sub_endereco_bairro" maxlength="100" name="ID_BAIRRO">
+														<option value="">Escolha um bairro</option>
+													</select>
 												
 											</div>
 					        				<div class="cendereco">
@@ -432,63 +360,5 @@
 								</script>
 			</section>
 
-<!-- footer-->
-
-
-<script src="js/bootstrap.min.js"></script>
-<script src="js/SmoothScroll.min.js"></script>
-<script src="js/modernizr.js"></script>
-
-
-<script>
-$(document).ready(function(){
-  
-  $("section.footer a[href='#myPage']").on('click', function(event) {
-
-  if (this.hash !== "") {
-
-    var hash = this.hash;
-
-    
-    $('html, body').animate({
-      scrollTop: $(hash).offset().top
-    }, 900, function(){
-
-     
-      window.location.hash = hash;
-      });
-    } 
-  });
-})
-</script>
-
-<script src="js/pricetable.js"></script>
-<script src="js/wmBox.js"></script>
-<script src="js/info.js"></script>
-<script src="js/jquery.min.js"></script>
-
-<script src="js/classie.js"></script>
-
-
-
-<script src="js/jquery.pogo-slider.min.js"></script>
-<script src="js/main.js"></script>
-
-<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
-<script>
-	$(document).ready(function() {
-	$('.popup-with-zoom-anim').magnificPopup({
-		type: 'inline',
-		fixedContentPos: false,
-		fixedBgPos: true,
-		overflowY: 'auto',
-		closeBtnInside: true,
-		preloader: false,
-		midClick: true,
-		removalDelay: 300,
-		mainClass: 'my-mfp-zoom-in'
-		});
-	});
-</script>
 </body>
 </html>

@@ -14,8 +14,8 @@ $link = $objBd->conecta_mysql();
 $sql = "SELECT * FROM cliente WHERE EMAIL = '$EMAIL' AND SENHA = '$SENHA' ";
 
 
-$resultado_id = mysqli_query($link, $sql);
 
+$resultado_id = mysqli_query($link, $sql);
 if($resultado_id){
 	$dados_usuario = mysqli_fetch_array($resultado_id);
 
@@ -29,6 +29,8 @@ if($resultado_id){
 
 
 		header('Location: home.php');
+
+		
 	}else{
 		header('Location: index.php?erro=1');
 	}

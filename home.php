@@ -2,37 +2,29 @@
 
 	session_start();
 
-	require_once('conexao.php');
+	include_once("conexao.php");
+
+	$_SESSION['ID_CLIENTE'];
 
 	if(!isset($_SESSION['EMAIL'])){
 	 header("Location: index.php?erro=1");
 	}
+
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
 <title>Cabana Nova</title>
-<!--mobile apps-->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Terrain Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- fonts -->
-<link href='//fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Titillium+Web:400,200,300,600,700,900' rel='stylesheet' type='text/css'>
-<!--link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"-->
-<!-- /fonts -->
-<!-- css files -->
+
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/pricetable.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/main.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/pogo-slider.min.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!-- /css files -->
-<!-- js files -->
+
 <script src="js/modernizr.js"></script>
 <!-- /js files -->
 </head>
@@ -57,7 +49,7 @@
 								<div id="navbar" class="navbar-collapse collapse">
 									<ul class="nav navbar-nav">
 										<li><a href="imoveis.php">IMOVEIS</a></li>
-										<li><a href="verificaLogin.php">ANUNCIAR</a></li>
+										<li><a href="cadastro-imovel.php">ANUNCIAR</a></li>
 									</ul>
 								</div>
 							</div>
@@ -73,8 +65,9 @@
 							
 							<div class="login">
 								<ul class="top-contacts">
-									<li class="top-hover"><p><i class="fa fa-user"></i><a href="#"><?php $_SESSION['NOME']; ?></a></p></li>
-									<li class=""><p><i class="fa fa-sign-in"></i><a href="sair.php">Sair</a>
+									<li class="anunciarImovel"><a href="cadastro-imovel.php"><button class="btn btn-default" >Anunciar Imovel</button></a></li>
+									<li class="top-hover"><p><i class="fa fa-user"></i><a href="painelControle.php"><?php echo $_SESSION['NOME']; ?></a></p></li>
+									<li class=""><p><i class="fas fa-sign-out-alt"></i></i><a href="sair.php">Sair</a>
 				<div class="modal fade" id="myModal-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="<?= $erro == 1 ? 'open' : '' ?>">
 			  		<div class="modal-dialog" role="document">
 			  		 	<div class="modal-content">
@@ -178,13 +171,89 @@
 	</div>
 </section>	
 <section>
-<div class="container">
+	
 
 <div class="banner-fundo">
-	<img src="images/banner1.jpg" width="108%" height="500px">
+
+	<img src="images/banner1.jpg" width="100%" height="500px">
 
 </div>
-</div>
+
+<div class="legenda">
+		<h1>CABANA NOVA</h1>
+		<h4>Aqui você encontra o imóvel que precisa</h4>
+	</div>
+
+	<div class="buscarImoveis">
+		<div class="col-md-12">
+			<div class="container">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form action="imoveis.php" method="POST">
+
+						<div class="col-md-4">
+									
+							<h5 class="title">Como podemos ajudar ?</h5>
+
+							<div class="btn-group" data-toggle="buttons">
+							 	<label class="btn btn-default">
+							    	<input type="radio" class="btnSelect" name="options" id="option1" >Comprar
+								</label>
+							 	<label class="btn btn-default">
+							    	<input type="radio" class="btnSelect" name="options" id="option2" >Alugar
+							  	</label>
+							 	<label class="btn btn-default">
+							    	<input type="radio" class="btnSelect" name="options" id="option3" >Alugar temporada
+							  	</label>
+							</div>
+
+						</div>
+						<div class="col-md-2">
+							<div>
+								<h5 class="title">Qual tipo ?</h5>
+							</div>
+							<div>
+								<select class="selectTipoImovel" maxlength="100" id="TIPO_IMOVEL" name="TIPO_IMOVEL">
+									<option value="oi">Selecione</option>
+									<?php
+
+									$objBd = new bd();
+									$link = $objBd->conecta_mysql();
+
+									$sql = "SELECT * FROM grupo_imovel";
+									$query = $link->query($sql);
+									while($result_sql = mysqli_fetch_assoc($query)){
+
+										echo'<option value="'.$result_sql['ID_GRUPO_IMOVEL'].'">'.$result_sql['DESCRICAO'].'</option>';
+									}
+
+									?>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-5">
+
+							<div>
+								<h5 class="titleLocal">Local ?</h5>
+							</div>
+
+							<i class="fa fa-search fa-lg"></i>&nbsp;
+							<input class="campoBusca" maxlength="100" autocomplete="off" placeholder="Digite aonde deseja localizar seu imovel" id="campoBusca" name="campoBusca" type="text" />
+							
+						</div>
+
+						<div class="col-md-1">
+
+							<button class="btn btn-info">Buscar</button>
+
+						</div>
+					</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </section>
 
 <section class="welcome">
@@ -306,35 +375,14 @@
 		</form>	
 	</div>
 </section>
-<!-- /subscribe section --
-<!-- map section --
-<div class="map">
-	<iframe class="googlemaps" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d380510.6741687111!2d-88.01234121699822!3d41.83390417061058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1455598377120" style="border:0" allowfullscreen></iframe>
-</div>
-<!-- /map section -->
-<!-- footer section -->
+
 <section class="footer"> 
 	<a href="#myPage" title="To Top" class="top">
 		<span class="glyphicon glyphicon-chevron-up"></span>
 	</a>
 	<a href="index.html" class="logo">Cabana Nova</a>
 	<div class="container">
-		<!--<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 footer-w3ls1">
-				<ul class="footer-links1 cl-effect-4">
-					<li><a href="about.html">About</a></li>
-					<li><a href="service.html">Services</a></li>
-					<li><a href="portfolio.html">Portfolio</a></li>
-				</ul>
-			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 footer-w3ls2">
-				<ul class="footer-links2 cl-effect-4">
-					<li><a href="blog.html">Blog</a></li>
-					<li><a href="typo.html">Typography</a></li>
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-			</div>
-		</div>-->
+		
 		<ul class="social-icons1">
 			<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 			<li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -403,6 +451,11 @@ $(document).ready(function(){
 		mainClass: 'my-mfp-zoom-in'
 		});
 	});
+</script>
+<script>
+	
+	$id_session
+
 </script>
 <!-- /js for pricing table pop up -->
 <!-- /js files -->

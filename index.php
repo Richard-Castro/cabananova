@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 	require_once('conexao.php');
 
@@ -11,22 +12,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cabana Nova</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Cabana Nova</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/pricetable.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/main.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/pogo-slider.min.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link rel="shortcut icon" href="images/logo.png" size="32x32" type="image/png" />
 
+	<script src="js/modernizr.js"></script>
 
-
-<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/pricetable.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/main.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/pogo-slider.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!-- /css files -->
-<!-- js files -->
-<script src="js/modernizr.js"></script>
-<!-- /js files -->
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 <section class="top-w3ls">
@@ -46,12 +47,7 @@
 									</button>
 									<a href="home.php"><div class="logo"><img src="images/logo.png"></div></a>
 								</div>
-								<div id="navbar" class="navbar-collapse collapse">
-									<ul class="nav navbar-nav">
-										<li><a href="imoveis.php">IMOVEIS</a></li>
-										<li><a href="fazerLogin.php">ANUNCIAR</a></li>
-									</ul>
-								</div>
+								
 							</div>
 						</nav>	
 					</div>
@@ -65,12 +61,14 @@
 							
 							<div class="login">
 								<ul class="top-contacts">
+									<li class="anunciarImovel"><a href="fazerLogin.php"><button class="btn btn-default" >Anunciar Imovel</button></a></li>
 									<li class="top-hover"><p><i class="fa fa-user"></i>
 										<a href="#" data-toggle="modal" data-target="#myModal">Criar conta</a></p></li>
 									<li class="<?= $erro == 1 ? 'open' : '' ?>"><p><i class="fa fa-sign-in"></i>
 										<a href="#" data-toggle="modal" data-target="#myModal-login">Entrar</a></p></li>
-										</ul>			
+								</ul>			
 							</div>
+
 						</div>
 					</div>		
 				</div>
@@ -93,15 +91,13 @@
 
 								<form method="POST" action="validar_acesso.php">
 
-									  <div class="form-group">
-									     <input type="text" class="form-control" name="email" placeholder="Digite seu e-mail" required>
-									  </div>
-									  <div class="form-group">
-									     <input type="password" class="form-control"  name="senha" placeholder="Digite sua senha" required>
-									  </div>
+									<div class="form-group">
+									    <input type="text" class="form-control" name="EMAIL" placeholder="Digite seu e-mail" required>
+									</div>
+									<div class="form-group">
+									    <input type="password" class="form-control"  name="SENHA" placeholder="Digite sua senha" required>
+									</div>
 
-									
-								  	
 								  	<button class="btn btn-default">Esqueci minha senha</button>
 								  	<button type="submit" class="btn btn-warning ">Entrar</button>
 
@@ -109,6 +105,7 @@
 									  	<h5>Se preferir, entre com sua conta do Facebook.</h5>
 								 		<button class="btn face btn-primary"><i class="fa fa-facebook"></i>Facebook</button>
 							 		</div>
+
 							 	</form>
 
 							</div>
@@ -129,11 +126,11 @@
 						       		 <h5>Preencha as informações para criar uma conta</h5>
 				      			</div>
 					     		<div class="modal-body">
-					        	<?php
-				     				if($erro_email){
-				     					echo '<font color="#FF0000">E-mail já cadastrado. Por favor, selecione a opcao entrar e digite seus dados de acesso.<br></font>';
+					        		<?php
+				     					if($erro_email){
+				     						echo '<font color="#FF0000">E-mail já cadastrado. Por favor, selecione a opcao entrar e digite seus dados de acesso.<br></font>';
 				     						}
-				     					?>
+				     				?>
 				     				
 									<form method="POST" action="registra_usuario.php" id="formcadastro">
 											<div class="form-group">
@@ -173,7 +170,7 @@
 								</div>
 
 					   		 	<div class="modal-footer">
-					       		 	<p>Ao me cadastrar confirmo que li e concordo com os <a href="#">Termos de uso</a>
+					       		 	<p>Ao me cadastrar confirmo que li e concordo com os <a href="#">Termos de uso</a></p>
 					      		</div>
 				  	 	 	</div>
 			  			</div>
@@ -186,15 +183,84 @@
 
 	<div class="banner-fundo">
 
-		<div class="container">
-			<div class="col-md-12">
+		<img src="images/banner1.jpg" width="100%" height="500px">
 
-				
+	</div>
 
+	<div class="legenda">
+		<h1>CABANA NOVA</h1>
+		<h4>Aqui você encontra o imóvel que precisa</h4>
+	</div>
+
+	<div class="buscarImoveis">
+		<div class="col-md-12">
+			<div class="container">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form action="imoveis.php" method="POST">
+
+						<div class="col-md-4">
+									
+							<h5 class="title">Como podemos ajudar ?</h5>
+
+							<div class="btn-group" data-toggle="buttons">
+							 	<label class="btn btn-default">
+							    	<input type="radio" class="btnSelect" name="options" id="option1" >Comprar
+								</label>
+							 	<label class="btn btn-default">
+							    	<input type="radio" class="btnSelect" name="options" id="option2" >Alugar
+							  	</label>
+							 	<label class="btn btn-default">
+							    	<input type="radio" class="btnSelect" name="options" id="option3" >Alugar temporada
+							  	</label>
+							</div>
+
+						</div>
+						<div class="col-md-2">
+							<div>
+								<h5 class="title">Qual tipo ?</h5>
+							</div>
+							<div>
+								<select class="selectTipoImovel" maxlength="100" id="TIPO_IMOVEL" name="TIPO_IMOVEL">
+									<option value="oi">Selecione</option>
+									<?php
+
+									$objBd = new bd();
+									$link = $objBd->conecta_mysql();
+
+									$sql = "SELECT * FROM grupo_imovel";
+									$query = $link->query($sql);
+									while($result_sql = mysqli_fetch_assoc($query)){
+
+										echo'<option value="'.$result_sql['ID_GRUPO_IMOVEL'].'">'.$result_sql['DESCRICAO'].'</option>';
+									}
+
+									?>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-5">
+
+							<div>
+								<h5 class="titleLocal">Local ?</h5>
+							</div>
+
+							<i class="fa fa-search fa-lg"></i>&nbsp;
+							<input class="campoBusca" maxlength="100" autocomplete="off" placeholder="Digite aonde deseja localizar seu imovel" id="campoBusca" name="campoBusca" type="text" />
+							
+						</div>
+
+						<div class="col-md-1">
+
+							<button class="btn btn-info">Buscar</button>
+
+						</div>
+					</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-
 </section>
 
 <section class="welcome">
@@ -207,47 +273,41 @@
 		</div>
 	</div>	
 </section>
-<!-- /welcome section -->
-<!-- info section -->
+ 
 <section class="info">
 	<div class="container">
 		<div class="row-thumbnails text-center">
-			
 				
-					<div class="col-md-4">
-						<div class="informacao">
-						
-							<img src="images/livro.jpg" width="213" height="150">
-							<h2>Busca simples</h2>
-							<p>Utilizando a barra com os filtros<br> facilmente vai localizar<br> o imóvel que procura, e as<br> informações e quem está<br> anunciando.</p>
-						
-					</div>
+			<div class="col-md-4">
+				<div class="informacao" id="informacao">
+				
+					<img src="images/livro.jpg" width="213" height="150">
+					<h2>Busca simples</h2>
+					<p>Utilizando a barra com os filtros<br /> facilmente vai localizar<br /> o imóvel que procura, e as<br /> informações e quem está<br /> anunciando.</p>
 				</div>
+			</div>
+		
+			<div class="col-md-4">
+				<div class="informacao">
 				
-					<div class="col-md-4">
-						<div class="informacao">
-						
 
-							<img src="images/casa3.jpg" width="200" height="150">
-							<h2>Anuncie seu Imovel</h2>
-							<p>Quer anunciar com a<br> gente ? Basta informar<br> os dados de seu imóvel<br> e pronto.</p>
-
-						
-					</div>
+					<img src="images/casa3.jpg" width="200" height="150">
+					<h2>Anuncie seu Imovel</h2>
+					<p>Quer anunciar com a<br /> gente ? Basta informar<br /> os dados de seu imóvel<br /> e pronto.</p>
 				</div>
-				
-					<div class="col-md-4">
-						<div class="informacao">
-							<img src="images/casafesta1.jpg" width="160" height="145">
-							<h2>Locais para festas</h2>
-							<p>Aproveite também e<br> anuncie casas de festas,<br> terrenos, áreas<br> comerciais! Sim, aqui <br>você pode.</p>	
-					</div>
+			</div>
+		
+			<div class="col-md-4">
+				<div class="informacao">
+					<img src="images/casafesta1.jpg" width="160" height="145">
+					<h2>Locais para festas</h2>
+					<p>Aproveite também e<br /> anuncie casas de festas,<br /> terrenos, áreas<br /> comerciais! Sim, aqui <br />você pode.</p>	
 				</div>
+			</div>
 		</div>	
 	</div>
 </section>
-<!-- info section -->
-<!-- team section -->
+
 <section class="team">
 	<div class="container">
 		<h3 class="text-center">Anuncios mais recentes</h3>
@@ -256,42 +316,42 @@
 			<div class="col-lg-3 col-md-3 col-sm-6 team-w3ls">
 				<div class="grid">
 					<figure class="effect-julia">
-						<img src="images/anun1.jpg" width"40%" height"50%" alt="w3layouts" class="img-responsive" title="w3layouts"/>
+						<img src="images/anun1.jpg" width="40%" height="50%" alt="w3layouts" class="img-responsive" title="w3layouts"/>
 						
 					</figure>
 				</div>
 				<h4 class="text-center">R$ 7.900,00</h4>
-				<p class="team-p1">America<br>6 dorms | 5 suites | 750m</p>	
+				<p class="team-p1">America<br />6 dorms | 5 suites | 750m</p>	
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-6 team-w3ls">
 				<div class="grid">
 					<figure class="effect-julia">
-						<img src="images/anun2.jpg" width"40%" height"50%" alt="w3layouts" class="img-responsive" title="w3layouts"/>
+						<img src="images/anun2.jpg" width="40%" height="50%" alt="w3layouts" class="img-responsive" title="w3layouts"/>
 							
 					</figure>
 				</div>
 				<h4 class="text-center">R$ 7.900,00</h4>
-				<p class="team-p1">America<br>6 dorms | 5 suites | 750m</p>	
+				<p class="team-p1">America<br />6 dorms | 5 suites | 750m</p>	
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-6 team-w3ls">
 				<div class="grid">
 					<figure class="effect-julia">
-						<img src="images/anun3.jpg" width"40%" height"50%" alt="w3layouts" class="img-responsive" title="w3layouts"/>
+						<img src="images/anun3.jpg" width="40%" height="50%" alt="w3layouts" class="img-responsive" title="w3layouts"/>
 								
 					</figure>
 				</div>
 				<h4 class="text-center">R$ 7.900,00</h4>
-				<p class="team-p1">America<br>6 dorms | 5 suites | 750m</p>	
+				<p class="team-p1">America<br />6 dorms | 5 suites | 750m</p>	
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-6 team-w3ls">
 				<div class="grid">
 					<figure class="effect-julia">
-						<img src="images/anun4.jpeg" width"40%" height"50%" alt="w3layouts" class="img-responsive" title="w3layouts"/>
+						<img src="images/anun4.jpeg" width="40%" height="50%" alt="w3layouts" class="img-responsive" title="w3layouts"/>
 							
 					</figure>
 				</div>
 				<h4 class="text-center">R$ 7.900,00</h4>
-				<p class="team-p1">America<br>6 dorms | 5 suites | 750m</p>				
+				<p class="team-p1">America<br />6 dorms | 5 suites | 750m</p>				
 			</div>
 		</div>	
 	</div>
@@ -304,7 +364,7 @@
 		<form action="#" method="post">
 			<div class="col-lg-10 col-md-10 col-sm-7 subs-w3ls1">
 				<div class="form-group1">
-					<input class="form-control" id="email" name="email" placeholder="Digite seu e-mail" type="email" required>
+					<input class="form-control" id="email" name="email" placeholder="Digite seu e-mail" type="email" >
 				</div>
 			</div>
 			<div class="col-lg-2 col-md-2 col-sm-5 subs-w3ls2">
@@ -312,7 +372,6 @@
 					<button class="btn btn-outline btn-lg" type="submit">Assinar</button>
 				</div>
 			</div>
-			<div class="clearfix"></div>
 		</form>	
 	</div>
 </section>
@@ -321,7 +380,7 @@
 	<a href="#myPage" title="To Top" class="top">
 		<span class="glyphicon glyphicon-chevron-up"></span>
 	</a>
-	<a href="index.html" class="logo">Cabana Nova</a>
+	<a href="index.php" class="logo">Cabana Nova</a>
 	<div class="container">
 		
 		<ul class="social-icons1">
@@ -333,13 +392,66 @@
 		<p class="copyright">Todos direitos reservados &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Termos de uso &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Cabana Nova Serviços de Anuncios Imoboliarios Ltda</p>
 	</div>
 </section>
-<!-- /footer section -->
-<!-- js files -->
- <script src="js/jquery/1.12.4/jquery.min.js"></script>
+
+<script src="js/jquery/1.12.4/jquery.min.js"></script>
 
 <script src="js/bootstrap.min.js"></script>
 <script src="js/SmoothScroll.min.js"></script>
 <!-- scroll to top -->
+<script>
+	$(document).ready(function(){
+
+		$('#campoBusca').typeahead({
+			source: function(query, result)
+			{
+				$.ajax({
+					url:"selectBuscaIndex.php",
+					method:"POST",
+					data:{query:query},
+					dataType:"json",
+					success:function(data)
+					{
+						result($.map(data, function(item){
+							return item;
+						}));
+					}
+				})
+			}
+		});
+	});
+</script>
+<script>
+	 $(document).ready(function()
+    {
+        $('#filtrar').click(function()
+        {
+
+
+            $.ajax({
+              type: 'POST',
+              url: 'filtroImoveisIndex.php',
+              data: {
+
+               'IdTipoImovel': $('#IdTipoImovel').val(),
+				'campoBusca': $('#campoBusca').val()
+				
+              },
+              success: function(data) 
+              {
+                // $('body').append(data);
+                // alert(data);
+
+                $('#informacao').html(data);
+
+
+              }
+            });
+        });
+
+    });
+	
+</script>
+
 <script>
 $(document).ready(function(){
   // Add smooth scrolling to all links in navbar + footer link
@@ -364,37 +476,18 @@ $(document).ready(function(){
   });
 })
 </script>
-<!-- /scroll to top -->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  			
 <script src="js/pricetable.js"></script>
 <script src="js/wmBox.js"></script>
 <script src="js/info.js"></script>
 <!-- js for search button -->
 <script src="js/classie.js"></script>
-<script src="js/uisearch.js"></script>
-<script>
-	new UISearch( document.getElementById( 'sb-search' ) );
-</script>
+
 <!-- /js for search button -->
 <script src="js/jquery.pogo-slider.min.js"></script>
 <script src="js/main.js"></script>
 <!-- js for pricing table pop up -->
 <script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
-<script>
-	$(document).ready(function() {
-	$('.popup-with-zoom-anim').magnificPopup({
-		type: 'inline',
-		fixedContentPos: false,
-		fixedBgPos: true,
-		overflowY: 'auto',
-		closeBtnInside: true,
-		preloader: false,
-		midClick: true,
-		removalDelay: 300,
-		mainClass: 'my-mfp-zoom-in'
-		});
-	});
-</script>
-<!-- /js for pricing table pop up -->
-<!-- /js files -->
 </body>
 </html>

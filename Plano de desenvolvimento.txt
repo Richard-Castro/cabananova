@@ -1,0 +1,5 @@
+1 - Aprender a montar pagina admin
+2 - Acertar função de usuario acessado ($_Session
+3 - Layout pagina inicial
+4 - Inserir tabela de Bairro
+5 - Uploads de imagem (verificar melhor opção)

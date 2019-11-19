@@ -4,8 +4,8 @@ session_start();
 
 require_once('conexao.php');
 
-$EMAIL  = $_POST['EMAIL'];
-$SENHA  = md5($_POST['SENHA']);
+$EMAIL = $_SESSION['EMAIL'];
+$SENHA = md5($_SESSION['SENHA']);
 
 $objBd = new bd();
 $link = $objBd->conecta_mysql();
@@ -23,11 +23,10 @@ if($resultado_id){
 		$_SESSION['SENHA'] = $dados_usuario['SENHA'];
 		$_SESSION['NOME'] = $dados_usuario['NOME'];
 		$_SESSION['ID_CLIENTE'] = $dados_usuario['ID_CLIENTE'];
-
-
+		
 		header('Location: cadastro-imovel.php');
 	}else{
-		header('Location: fazerLogin.php?erro=1');
+		header('Location: index.php?erro=1');
 	}
 
 }else{

@@ -4,7 +4,6 @@
 
 	$msg = false;
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,9 +102,9 @@
 
 	    					<?php if($msg != false) echo "<p> $msg </p>"; ?>
 
-							<form enctype="multipart/form-data" action="upload.php" method="POST">
+							<form action="upload.php" method="POST" enctype="multipart/form-data">
 								<label class="control-label">Selecione os arquivos desejados:</label>
-								<input id="arquivo" name="ARQUIVOS" type="file" class="file" multiple data-show-upload="false" data-show-caption="true">
+								<input id="arquivos" name="ARQUIVOS" type="file" class="file" multiple data-show-upload="false" data-show-caption="true">
 								<input type="submit" value="Enviar arquivo" />
 							</form>
 
